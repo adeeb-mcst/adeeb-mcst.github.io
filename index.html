@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="./jquery-3.4.1.slim.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./w3.css">
+    <style>
+      body {
+        background-image: url("hrBG.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      h2, p {
+        color: rgb(255, 255, 255);
+        text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+        font-weight: bold;
+      }
+
+      .slidecontainer {
+        width: 100%;
+      }
+
+      .slider,
+      .sliderRank01,
+      .sliderRank02,
+      .sliderRank03,
+      .sliderRank04 {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        -webkit-transition: 0.2s;
+        transition: opacity 0.2s;
+        pointer-events: none;
+      }
+
+      .slider:hover {
+        opacity: 1;
+      }
+
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: none;
+        height: 50px;
+        width: 50px;
+        background: goldenrod;
+        background: url('horse.png') no-repeat;
+        transform: scaleX(-1);
+        background-size: cover;
+        margin-top: -15px;
+        border-radius: 0 !important;
+      }
+
+      .sliderRank01::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: none;
+        height: 50px;
+        width: 50px;
+        background: goldenrod;
+        background: url("rank01.png") no-repeat;
+        background-size: cover;
+        margin-top: -15px;
+        border-radius: 0 !important;
+      }
+      .sliderRank02::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: none;
+        height: 50px;
+        width: 50px;
+        background: goldenrod;
+        background: url("rank02.png") no-repeat;
+        background-size: cover;
+        margin-top: -15px;
+        border-radius: 0 !important;
+      }
+      .sliderRank03::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: none;
+        height: 50px;
+        width: 50px;
+        background: goldenrod;
+        background: url("rank03.png") no-repeat;
+        background-size: cover;
+        margin-top: -15px;
+        border-radius: 0 !important;
+      }
+      .sliderRank04::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: none;
+        height: 50px;
+        width: 50px;
+        background: goldenrod;
+        background: url("rank04.png") no-repeat;
+        background-size: cover;
+        margin-top: -15px;
+        border-radius: 0 !important;
+      }
+
+      .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #4caf50;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Race Time: <time>00:00:00</time></h2>
+
+    <div class="slidecontainer">
+      <input
+        type="range"
+        min="0"
+        max="10000"
+        value="0"
+        class="slider"
+        id="horse01"
+      />
+      <p>Time: <span id="h1Time"></span></p>
+    </div>
+    <div class="slidecontainer">
+      <input
+        type="range"
+        min="0"
+        max="10000"
+        value="0"
+        class="slider"
+        id="horse02"
+      />
+      <p>Time: <span id="h2Time"></span></p>
+    </div>
+    <div class="slidecontainer">
+      <input
+        type="range"
+        min="0"
+        max="10000"
+        value="0"
+        class="slider"
+        id="horse03"
+      />
+      <p>Time: <span id="h3Time"></span></p>
+    </div>
+    <div class="slidecontainer">
+      <input
+        type="range"
+        min="0"
+        max="10000"
+        value="0"
+        class="slider"
+        id="horse04"
+      />
+      <p>Time: <span id="h4Time"></span></p>
+    </div>
+
+    <div class="buttons" style="text-align:center">
+      <button onclick="powerIt()" class="w3-button w3-red w3-round">Power!</button>
+      <button id="restart" class="w3-button w3-green w3-round">Restart</button>
+    </div>
+    <script>
+      var horseOne = document.getElementById("horse01");
+      var horseTwo = document.getElementById("horse02");
+      var horseThree = document.getElementById("horse03");
+      var horseFour = document.getElementById("horse04");
+      var horseOneTime = document.getElementById("h1Time");
+      var horseTwoTime = document.getElementById("h2Time");
+      var horseThreeTime = document.getElementById("h3Time");
+      var horseFourTime = document.getElementById("h4Time");
+      var horseRank = 0;
+      var horseOneRank = 0;
+      var horseTwoRank = 0;
+      var horseThreeRank = 0;
+      var horseFourRank = 0;
+
+      function steps() {
+        var s = Math.floor(Math.random() * 41);
+        return s > 22 ? 40 : 0;
+      }
+
+      function stepsHorses(stp) {
+        return Math.floor(Math.random() * stp[Math.floor(Math.random() * 5)]);
+      }
+      
+
+      function horsesRank() {
+        if (horseOne.value >= 10000 && horseOneRank == 0) {
+          ++horseRank;
+          horseOneRank = horseRank;
+          horseOne.className = "sliderRank0" + horseRank;
+          horseOneTime.innerHTML = rt.textContent;
+        }
+        if (horseTwo.value >= 10000 && horseTwoRank == 0) {
+          ++horseRank;
+          horseTwoRank = horseRank;
+          horseTwo.className = "sliderRank0" + horseRank;
+          horseTwoTime.value = rt.textContent;
+        }
+        if (horseThree.value >= 10000 && horseThreeRank == 0) {
+          ++horseRank;
+          horseThreeRank = horseRank;
+          horseThree.className = "sliderRank0" + horseRank;
+          horseThreeTime.value = rt.textContent;
+        }
+        if (horseFour.value >= 10000 && horseFourRank == 0) {
+          ++horseRank;
+          horseFourRank = horseRank;
+          horseFour.className = "sliderRank0" + horseRank;
+          horseFourTime.value = rt.textContent;
+        }
+      }
+
+      function horsesTime() {
+        if (horseOneRank == 0) horseOneTime.innerHTML = rt.textContent;
+        if (horseTwoRank == 0) horseTwoTime.innerHTML = rt.textContent;
+        if (horseThreeRank == 0) horseThreeTime.innerHTML = rt.textContent;
+        if (horseFourRank == 0) horseFourTime.innerHTML = rt.textContent;
+      }
+
+var horsePower = [1,2,3,5,7];
+
+      function horsesRunning() {
+        horseOne.value++;
+        horseTwo.value = parseInt(horseTwo.value) + stepsHorses(horsePower);
+        horseThree.value = parseInt(horseThree.value) + stepsHorses(horsePower);
+        horseFour.value = parseInt(horseFour.value) + stepsHorses(horsePower);
+        horsesTime();
+        horsesRank();
+      }
+
+      var RaceCounter = setInterval(() => {
+        horsesRunning();
+        if (horseRank == 4) {
+          clearTimeout(t);
+          clearInterval(RaceCounter);
+          $('body').css('backgroundImage', 'url(greenField.jpg)');
+        }
+      }, 1);
+
+      function powerIt() {
+        horseOne.value = parseInt(horseOne.value) + steps();
+//console.log();
+
+      }
+
+      var rt = document.getElementsByTagName("time")[0],
+        //start = document.getElementById("start"),
+        //stop = document.getElementById("stop"),
+        //clear = document.getElementById("clear"),
+        seconds = 0,
+        minutes = 0,
+        hours = 0,
+        t;
+
+      function add() {
+        seconds++;
+        if (seconds >= 60) {
+          seconds = 0;
+          minutes++;
+          if (minutes >= 60) {
+            minutes = 0;
+            hours++;
+          }
+        }
+
+        rt.textContent =
+          (hours ? (hours > 9 ? hours : "0" + hours) : "00") +
+          ":" +
+          (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") +
+          ":" +
+          (seconds > 9 ? seconds : "0" + seconds);
+
+        timer();
+      }
+      function timer() {
+        t = setTimeout(add, 1000);
+      }
+      timer(); 
+
+      $(document).ready(function() {
+        $("#restart").click(function() {
+          location.reload(true);
+        });
+      });
+    </script>
+  </body>
+</html>
